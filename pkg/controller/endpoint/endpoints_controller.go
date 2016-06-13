@@ -23,6 +23,7 @@ import (
 	"time"
 
 	"encoding/json"
+
 	"github.com/golang/glog"
 	"k8s.io/kubernetes/pkg/api"
 	"k8s.io/kubernetes/pkg/api/endpoints"
@@ -424,6 +425,7 @@ func (e *EndpointController) syncService(key string) {
 	newEndpoints := currentEndpoints
 	newEndpoints.Subsets = subsets
 	newEndpoints.Labels = service.Labels
+	newEndpoints.Annotations = service.Annotations
 	if newEndpoints.Annotations == nil {
 		newEndpoints.Annotations = make(map[string]string)
 	}
