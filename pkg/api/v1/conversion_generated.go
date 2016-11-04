@@ -392,6 +392,18 @@ func autoConvert_api_Container_To_v1_Container(in *api.Container, out *Container
 	out.Stdin = in.Stdin
 	out.StdinOnce = in.StdinOnce
 	out.TTY = in.TTY
+	out.DockerLogDriver = in.DockerLogDriver
+	if in.DockerLogOptions != nil {
+		out.DockerLogOptions = make([]DockerLogOptionsVar, len(in.DockerLogOptions))
+		for i := range in.DockerLogOptions {
+			if err := Convert_api_DockerLogOptionsVar_To_v1_DockerLogOptionsVar(&in.DockerLogOptions[i], &out.DockerLogOptions[i], s); err != nil {
+				return err
+			}
+		}
+	} else {
+		out.DockerLogOptions = nil
+	}
+
 	return nil
 }
 
@@ -804,6 +816,19 @@ func autoConvert_api_EnvVarSource_To_v1_EnvVarSource(in *api.EnvVarSource, out *
 
 func Convert_api_EnvVarSource_To_v1_EnvVarSource(in *api.EnvVarSource, out *EnvVarSource, s conversion.Scope) error {
 	return autoConvert_api_EnvVarSource_To_v1_EnvVarSource(in, out, s)
+}
+
+func autoConvert_api_DockerLogOptionsVar_To_v1_DockerLogOptionsVar(in *api.DockerLogOptionsVar, out *DockerLogOptionsVar, s conversion.Scope) error {
+	if defaulting, found := s.DefaultingInterface(reflect.TypeOf(*in)); found {
+		defaulting.(func(*api.DockerLogOptionsVar))(in)
+	}
+	out.Name = in.Name
+	out.Value = in.Value
+	return nil
+}
+
+func Convert_api_DockerLogOptionsVar_To_v1_DockerLogOptionsVar(in *api.DockerLogOptionsVar, out *DockerLogOptionsVar, s conversion.Scope) error {
+	return autoConvert_api_DockerLogOptionsVar_To_v1_DockerLogOptionsVar(in, out, s)
 }
 
 func autoConvert_api_Event_To_v1_Event(in *api.Event, out *Event, s conversion.Scope) error {
@@ -3697,6 +3722,18 @@ func autoConvert_v1_Container_To_api_Container(in *Container, out *api.Container
 	out.Stdin = in.Stdin
 	out.StdinOnce = in.StdinOnce
 	out.TTY = in.TTY
+	out.DockerLogDriver = in.DockerLogDriver
+	if in.DockerLogOptions != nil {
+		out.DockerLogOptions = make([]api.DockerLogOptionsVar, len(in.DockerLogOptions))
+		for i := range in.DockerLogOptions {
+			if err := Convert_v1_DockerLogOptionsVar_To_api_DockerLogOptionsVar(&in.DockerLogOptions[i], &out.DockerLogOptions[i], s); err != nil {
+				return err
+			}
+		}
+	} else {
+		out.DockerLogOptions = nil
+	}
+
 	return nil
 }
 
@@ -4109,6 +4146,19 @@ func autoConvert_v1_EnvVarSource_To_api_EnvVarSource(in *EnvVarSource, out *api.
 
 func Convert_v1_EnvVarSource_To_api_EnvVarSource(in *EnvVarSource, out *api.EnvVarSource, s conversion.Scope) error {
 	return autoConvert_v1_EnvVarSource_To_api_EnvVarSource(in, out, s)
+}
+
+func autoConvert_v1_DockerLogOptionsVar_To_api_DockerLogOptionsVar(in *DockerLogOptionsVar, out *api.DockerLogOptionsVar, s conversion.Scope) error {
+	if defaulting, found := s.DefaultingInterface(reflect.TypeOf(*in)); found {
+		defaulting.(func(*DockerLogOptionsVar))(in)
+	}
+	out.Name = in.Name
+	out.Value = in.Value
+	return nil
+}
+
+func Convert_v1_DockerLogOptionsVar_To_api_DockerLogOptionsVar(in *DockerLogOptionsVar, out *api.DockerLogOptionsVar, s conversion.Scope) error {
+	return autoConvert_v1_DockerLogOptionsVar_To_api_DockerLogOptionsVar(in, out, s)
 }
 
 func autoConvert_v1_Event_To_api_Event(in *Event, out *api.Event, s conversion.Scope) error {
@@ -6550,6 +6600,7 @@ func init() {
 		autoConvert_api_Endpoints_To_v1_Endpoints,
 		autoConvert_api_EnvVarSource_To_v1_EnvVarSource,
 		autoConvert_api_EnvVar_To_v1_EnvVar,
+		autoConvert_api_DockerLogOptionsVar_To_v1_DockerLogOptionsVar,
 		autoConvert_api_EventList_To_v1_EventList,
 		autoConvert_api_EventSource_To_v1_EventSource,
 		autoConvert_api_Event_To_v1_Event,
@@ -6681,6 +6732,7 @@ func init() {
 		autoConvert_v1_Endpoints_To_api_Endpoints,
 		autoConvert_v1_EnvVarSource_To_api_EnvVarSource,
 		autoConvert_v1_EnvVar_To_api_EnvVar,
+		autoConvert_v1_DockerLogOptionsVar_To_api_DockerLogOptionsVar,
 		autoConvert_v1_EventList_To_api_EventList,
 		autoConvert_v1_EventSource_To_api_EventSource,
 		autoConvert_v1_Event_To_api_Event,

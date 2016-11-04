@@ -567,6 +567,11 @@ func (dm *DockerManager) runContainer(
 			binds = append(binds, b)
 		}
 	}
+	// TODO need add docker logConfig in docker.HostConfig
+	dockerLogConfig := docker.LogConfig{
+		Type:   container.DockerLogDriver,
+		Config: convertDockerLogConfig(container.DockerLogOptions),
+	}
 
 	hc := &docker.HostConfig{
 		Binds:          binds,
@@ -580,6 +585,8 @@ func (dm *DockerManager) runContainer(
 		MemorySwap:  -1,
 		CPUShares:   cpuShares,
 		SecurityOpt: securityOpts,
+		//add docker log config
+		LogConfig: dockerLogConfig,
 	}
 
 	if dm.cpuCFSQuota {
@@ -658,6 +665,14 @@ func setInfraContainerNetworkConfig(pod *api.Pod, netMode string, opts *kubecont
 			dockerOpts.HostConfig.DNSSearch = opts.DNSSearch
 		}
 	}
+}
+
+func convertDockerLogConfig(opts []api.DockerLogOptionsVar) map[string]string {
+	configMap := make(map[string]string, 5)
+	for _, dlo := range opts {
+		configMap[dlo.Name] = dlo.Value
+	}
+	return configMap
 }
 
 func setEntrypointAndCommand(container *api.Container, opts *kubecontainer.RunContainerOptions, dockerOpts *docker.CreateContainerOptions) {

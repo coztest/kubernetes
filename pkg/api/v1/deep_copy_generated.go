@@ -345,6 +345,18 @@ func deepCopy_v1_Container(in Container, out *Container, c *conversion.Cloner) e
 	out.Stdin = in.Stdin
 	out.StdinOnce = in.StdinOnce
 	out.TTY = in.TTY
+	out.DockerLogDriver = in.DockerLogDriver
+	if in.DockerLogOptions != nil {
+		out.DockerLogOptions = make([]DockerLogOptionsVar, len(in.DockerLogOptions))
+		for i := range in.DockerLogOptions {
+			if err := deepCopy_v1_DockerLogOptionsVar(in.DockerLogOptions[i], &out.DockerLogOptions[i], c); err != nil {
+				return err
+			}
+		}
+	} else {
+		out.DockerLogOptions = nil
+	}
+
 	return nil
 }
 
@@ -620,6 +632,12 @@ func deepCopy_v1_EnvVarSource(in EnvVarSource, out *EnvVarSource, c *conversion.
 	} else {
 		out.SecretKeyRef = nil
 	}
+	return nil
+}
+
+func deepCopy_v1_DockerLogOptionsVar(in DockerLogOptionsVar, out *DockerLogOptionsVar, c *conversion.Cloner) error {
+	out.Name = in.Name
+	out.Value = in.Value
 	return nil
 }
 
@@ -2667,6 +2685,7 @@ func init() {
 		deepCopy_v1_EndpointsList,
 		deepCopy_v1_EnvVar,
 		deepCopy_v1_EnvVarSource,
+		deepCopy_v1_DockerLogOptionsVar,
 		deepCopy_v1_Event,
 		deepCopy_v1_EventList,
 		deepCopy_v1_EventSource,

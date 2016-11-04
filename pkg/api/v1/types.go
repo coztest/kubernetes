@@ -1136,9 +1136,18 @@ type Container struct {
 	// flag is false, a container processes that reads from stdin will never receive an EOF.
 	// Default is false
 	StdinOnce bool `json:"stdinOnce,omitempty"`
+
 	// Whether this container should allocate a TTY for itself, also requires 'stdin' to be true.
 	// Default is false.
 	TTY bool `json:"tty,omitempty"`
+	// This is the log options only for Docker container(rkt does not has these features)
+	DockerLogDriver  string                `json:"dockerLogDriver"`
+	DockerLogOptions []DockerLogOptionsVar `json:"dockerLogOptions,omitempty"`
+}
+
+type DockerLogOptionsVar struct {
+	Name  string `json:"name"`
+	Value string `json:"value,omitempty"`
 }
 
 // Handler defines a specific action that should be taken

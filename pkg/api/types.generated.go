@@ -24,6 +24,10 @@ package api
 import (
 	"errors"
 	"fmt"
+	"reflect"
+	"runtime"
+	time "time"
+
 	codec1978 "github.com/ugorji/go/codec"
 	pkg3_resource "k8s.io/kubernetes/pkg/api/resource"
 	pkg2_unversioned "k8s.io/kubernetes/pkg/api/unversioned"
@@ -32,10 +36,7 @@ import (
 	pkg8_runtime "k8s.io/kubernetes/pkg/runtime"
 	pkg1_types "k8s.io/kubernetes/pkg/types"
 	pkg5_intstr "k8s.io/kubernetes/pkg/util/intstr"
-	"reflect"
-	"runtime"
 	pkg4_inf "speter.net/go/exp/math/dec/inf"
-	time "time"
 )
 
 const (
@@ -14707,6 +14708,216 @@ func (x *EnvVar) codecDecodeSelfFromArray(l int, d *codec1978.Decoder) {
 	z.DecSendContainerState(codecSelfer_containerArrayEnd1234)
 }
 
+func (x *DockerLogOptionsVar) CodecEncodeSelf(e *codec1978.Encoder) {
+	var h codecSelfer1234
+	z, r := codec1978.GenHelperEncoder(e)
+	_, _, _ = h, z, r
+	if x == nil {
+		r.EncodeNil()
+	} else {
+		yym1 := z.EncBinary()
+		_ = yym1
+		if false {
+		} else if z.HasExtensions() && z.EncExt(x) {
+		} else {
+			yysep2 := !z.EncBinary()
+			yy2arr2 := z.EncBasicHandle().StructToArray
+			var yyq2 [2]bool
+			_, _, _ = yysep2, yyq2, yy2arr2
+			const yyr2 bool = false
+			yyq2[1] = x.Value != ""
+			var yynn2 int
+			if yyr2 || yy2arr2 {
+				r.EncodeArrayStart(2)
+			} else {
+				yynn2 = 1
+				for _, b := range yyq2 {
+					if b {
+						yynn2++
+					}
+				}
+				r.EncodeMapStart(yynn2)
+				yynn2 = 0
+			}
+			if yyr2 || yy2arr2 {
+				z.EncSendContainerState(codecSelfer_containerArrayElem1234)
+				yym4 := z.EncBinary()
+				_ = yym4
+				if false {
+				} else {
+					r.EncodeString(codecSelferC_UTF81234, string(x.Name))
+				}
+			} else {
+				z.EncSendContainerState(codecSelfer_containerMapKey1234)
+				r.EncodeString(codecSelferC_UTF81234, string("name"))
+				z.EncSendContainerState(codecSelfer_containerMapValue1234)
+				yym5 := z.EncBinary()
+				_ = yym5
+				if false {
+				} else {
+					r.EncodeString(codecSelferC_UTF81234, string(x.Name))
+				}
+			}
+			if yyr2 || yy2arr2 {
+				z.EncSendContainerState(codecSelfer_containerArrayElem1234)
+				if yyq2[1] {
+					yym7 := z.EncBinary()
+					_ = yym7
+					if false {
+					} else {
+						r.EncodeString(codecSelferC_UTF81234, string(x.Value))
+					}
+				} else {
+					r.EncodeString(codecSelferC_UTF81234, "")
+				}
+			} else {
+				if yyq2[1] {
+					z.EncSendContainerState(codecSelfer_containerMapKey1234)
+					r.EncodeString(codecSelferC_UTF81234, string("value"))
+					z.EncSendContainerState(codecSelfer_containerMapValue1234)
+					yym8 := z.EncBinary()
+					_ = yym8
+					if false {
+					} else {
+						r.EncodeString(codecSelferC_UTF81234, string(x.Value))
+					}
+				}
+			}
+			if yyr2 || yy2arr2 {
+				z.EncSendContainerState(codecSelfer_containerArrayEnd1234)
+			} else {
+				z.EncSendContainerState(codecSelfer_containerMapEnd1234)
+			}
+		}
+	}
+}
+
+func (x *DockerLogOptionsVar) CodecDecodeSelf(d *codec1978.Decoder) {
+	var h codecSelfer1234
+	z, r := codec1978.GenHelperDecoder(d)
+	_, _, _ = h, z, r
+	yym1 := z.DecBinary()
+	_ = yym1
+	if false {
+	} else if z.HasExtensions() && z.DecExt(x) {
+	} else {
+		yyct2 := r.ContainerType()
+		if yyct2 == codecSelferValueTypeMap1234 {
+			yyl2 := r.ReadMapStart()
+			if yyl2 == 0 {
+				z.DecSendContainerState(codecSelfer_containerMapEnd1234)
+			} else {
+				x.codecDecodeSelfFromMap(yyl2, d)
+			}
+		} else if yyct2 == codecSelferValueTypeArray1234 {
+			yyl2 := r.ReadArrayStart()
+			if yyl2 == 0 {
+				z.DecSendContainerState(codecSelfer_containerArrayEnd1234)
+			} else {
+				x.codecDecodeSelfFromArray(yyl2, d)
+			}
+		} else {
+			panic(codecSelferOnlyMapOrArrayEncodeToStructErr1234)
+		}
+	}
+}
+
+func (x *DockerLogOptionsVar) codecDecodeSelfFromMap(l int, d *codec1978.Decoder) {
+	var h codecSelfer1234
+	z, r := codec1978.GenHelperDecoder(d)
+	_, _, _ = h, z, r
+	var yys3Slc = z.DecScratchBuffer() // default slice to decode into
+	_ = yys3Slc
+	var yyhl3 bool = l >= 0
+	for yyj3 := 0; ; yyj3++ {
+		if yyhl3 {
+			if yyj3 >= l {
+				break
+			}
+		} else {
+			if r.CheckBreak() {
+				break
+			}
+		}
+		z.DecSendContainerState(codecSelfer_containerMapKey1234)
+		yys3Slc = r.DecodeBytes(yys3Slc, true, true)
+		yys3 := string(yys3Slc)
+		z.DecSendContainerState(codecSelfer_containerMapValue1234)
+		switch yys3 {
+		case "name":
+			if r.TryDecodeAsNil() {
+				x.Name = ""
+			} else {
+				x.Name = string(r.DecodeString())
+			}
+		case "value":
+			if r.TryDecodeAsNil() {
+				x.Value = ""
+			} else {
+				x.Value = string(r.DecodeString())
+			}
+		default:
+			z.DecStructFieldNotFound(-1, yys3)
+		} // end switch yys3
+	} // end for yyj3
+	z.DecSendContainerState(codecSelfer_containerMapEnd1234)
+}
+
+func (x *DockerLogOptionsVar) codecDecodeSelfFromArray(l int, d *codec1978.Decoder) {
+	var h codecSelfer1234
+	z, r := codec1978.GenHelperDecoder(d)
+	_, _, _ = h, z, r
+	var yyj7 int
+	var yyb7 bool
+	var yyhl7 bool = l >= 0
+	yyj7++
+	if yyhl7 {
+		yyb7 = yyj7 > l
+	} else {
+		yyb7 = r.CheckBreak()
+	}
+	if yyb7 {
+		z.DecSendContainerState(codecSelfer_containerArrayEnd1234)
+		return
+	}
+	z.DecSendContainerState(codecSelfer_containerArrayElem1234)
+	if r.TryDecodeAsNil() {
+		x.Name = ""
+	} else {
+		x.Name = string(r.DecodeString())
+	}
+	yyj7++
+	if yyhl7 {
+		yyb7 = yyj7 > l
+	} else {
+		yyb7 = r.CheckBreak()
+	}
+	if yyb7 {
+		z.DecSendContainerState(codecSelfer_containerArrayEnd1234)
+		return
+	}
+	z.DecSendContainerState(codecSelfer_containerArrayElem1234)
+	if r.TryDecodeAsNil() {
+		x.Value = ""
+	} else {
+		x.Value = string(r.DecodeString())
+	}
+	for {
+		yyj7++
+		if yyhl7 {
+			yyb7 = yyj7 > l
+		} else {
+			yyb7 = r.CheckBreak()
+		}
+		if yyb7 {
+			break
+		}
+		z.DecSendContainerState(codecSelfer_containerArrayElem1234)
+		z.DecStructFieldNotFound(yyj7-1, "")
+	}
+	z.DecSendContainerState(codecSelfer_containerArrayEnd1234)
+}
+
 func (x *EnvVarSource) CodecEncodeSelf(e *codec1978.Encoder) {
 	var h codecSelfer1234
 	z, r := codec1978.GenHelperEncoder(e)
@@ -17744,7 +17955,7 @@ func (x *Container) CodecEncodeSelf(e *codec1978.Encoder) {
 		} else {
 			yysep2 := !z.EncBinary()
 			yy2arr2 := z.EncBasicHandle().StructToArray
-			var yyq2 [18]bool
+			var yyq2 [20]bool
 			_, _, _ = yysep2, yyq2, yy2arr2
 			const yyr2 bool = false
 			yyq2[2] = len(x.Command) != 0
@@ -17762,9 +17973,11 @@ func (x *Container) CodecEncodeSelf(e *codec1978.Encoder) {
 			yyq2[15] = x.Stdin != false
 			yyq2[16] = x.StdinOnce != false
 			yyq2[17] = x.TTY != false
+			yyq2[18] = x.DockerLogDriver != ""
+
 			var yynn2 int
 			if yyr2 || yy2arr2 {
-				r.EncodeArrayStart(18)
+				r.EncodeArrayStart(20)
 			} else {
 				yynn2 = 3
 				for _, b := range yyq2 {
@@ -18222,6 +18435,64 @@ func (x *Container) CodecEncodeSelf(e *codec1978.Encoder) {
 				}
 			}
 			if yyr2 || yy2arr2 {
+				z.EncSendContainerState(codecSelfer_containerArrayElem1234)
+				if yyq2[18] {
+					yym42 := z.EncBinary()
+					_ = yym42
+					if false {
+					} else {
+						r.EncodeString(codecSelferC_UTF81234, string(x.DockerLogDriver))
+					}
+				} else {
+					r.EncodeString(codecSelferC_UTF81234, "")
+				}
+			} else {
+				if yyq2[18] {
+					z.EncSendContainerState(codecSelfer_containerMapKey1234)
+					r.EncodeString(codecSelferC_UTF81234, string("dockerLogDriver"))
+					z.EncSendContainerState(codecSelfer_containerMapValue1234)
+					yym43 := z.EncBinary()
+					_ = yym43
+					if false {
+					} else {
+						r.EncodeString(codecSelferC_UTF81234, string(x.DockerLogDriver))
+					}
+				}
+			}
+			if yyr2 || yy2arr2 {
+				z.EncSendContainerState(codecSelfer_containerArrayElem1234)
+				if yyq2[19] {
+					if x.DockerLogOptions == nil {
+						r.EncodeNil()
+					} else {
+						yym22 := z.EncBinary()
+						_ = yym22
+						if false {
+						} else {
+							h.encSliceDockerLogOptionsVar(([]DockerLogOptionsVar)(x.DockerLogOptions), e)
+						}
+					}
+				} else {
+					r.EncodeNil()
+				}
+			} else {
+				if yyq2[19] {
+					z.EncSendContainerState(codecSelfer_containerMapKey1234)
+					r.EncodeString(codecSelferC_UTF81234, string("dockerLogOptions"))
+					z.EncSendContainerState(codecSelfer_containerMapValue1234)
+					if x.DockerLogOptions == nil {
+						r.EncodeNil()
+					} else {
+						yym23 := z.EncBinary()
+						_ = yym23
+						if false {
+						} else {
+							h.encSliceDockerLogOptionsVar(([]DockerLogOptionsVar)(x.DockerLogOptions), e)
+						}
+					}
+				}
+			}
+			if yyr2 || yy2arr2 {
 				z.EncSendContainerState(codecSelfer_containerArrayEnd1234)
 			} else {
 				z.EncSendContainerState(codecSelfer_containerMapEnd1234)
@@ -18440,6 +18711,24 @@ func (x *Container) codecDecodeSelfFromMap(l int, d *codec1978.Decoder) {
 				x.TTY = false
 			} else {
 				x.TTY = bool(r.DecodeBool())
+			}
+		case "dockerLogDriver":
+			if r.TryDecodeAsNil() {
+				x.DockerLogDriver = ""
+			} else {
+				x.DockerLogDriver = string(r.DecodeString())
+			}
+		case "dockerLogOptions":
+			if r.TryDecodeAsNil() {
+				x.DockerLogOptions = nil
+			} else {
+				yyv13 := &x.DockerLogOptions
+				yym14 := z.DecBinary()
+				_ = yym14
+				if false {
+				} else {
+					h.decSliceDockerLogOptionsVar((*[]DockerLogOptionsVar)(yyv13), d)
+				}
 			}
 		default:
 			z.DecStructFieldNotFound(-1, yys3)
@@ -18794,6 +19083,23 @@ func (x *Container) codecDecodeSelfFromArray(l int, d *codec1978.Decoder) {
 	} else {
 		x.TTY = bool(r.DecodeBool())
 	}
+	if r.TryDecodeAsNil() {
+		x.DockerLogDriver = ""
+	} else {
+		x.DockerLogDriver = string(r.DecodeString())
+	}
+	if r.TryDecodeAsNil() {
+		x.DockerLogOptions = nil
+	} else {
+		yyv37 := &x.DockerLogOptions
+		yym38 := z.DecBinary()
+		_ = yym38
+		if false {
+		} else {
+			h.decSliceDockerLogOptionsVar((*[]DockerLogOptionsVar)(yyv37), d)
+		}
+	}
+
 	for {
 		yyj27++
 		if yyhl27 {
@@ -50080,6 +50386,125 @@ func (x codecSelfer1234) decSliceEnvVar(v *[]EnvVar, d *codec1978.Decoder) {
 			yyc1 = true
 		} else if yyj1 == 0 && yyv1 == nil {
 			yyv1 = []EnvVar{}
+			yyc1 = true
+		}
+	}
+	yyh1.End()
+	if yyc1 {
+		*v = yyv1
+	}
+}
+
+func (x codecSelfer1234) encSliceDockerLogOptionsVar(v []DockerLogOptionsVar, e *codec1978.Encoder) {
+	var h codecSelfer1234
+	z, r := codec1978.GenHelperEncoder(e)
+	_, _, _ = h, z, r
+	r.EncodeArrayStart(len(v))
+	for _, yyv1 := range v {
+		z.EncSendContainerState(codecSelfer_containerArrayElem1234)
+		yy2 := &yyv1
+		yy2.CodecEncodeSelf(e)
+	}
+	z.EncSendContainerState(codecSelfer_containerArrayEnd1234)
+}
+
+func (x codecSelfer1234) decSliceDockerLogOptionsVar(v *[]DockerLogOptionsVar, d *codec1978.Decoder) {
+	var h codecSelfer1234
+	z, r := codec1978.GenHelperDecoder(d)
+	_, _, _ = h, z, r
+
+	yyv1 := *v
+	yyh1, yyl1 := z.DecSliceHelperStart()
+	var yyc1 bool
+	_ = yyc1
+	if yyl1 == 0 {
+		if yyv1 == nil {
+			yyv1 = []DockerLogOptionsVar{}
+			yyc1 = true
+		} else if len(yyv1) != 0 {
+			yyv1 = yyv1[:0]
+			yyc1 = true
+		}
+	} else if yyl1 > 0 {
+		var yyrr1, yyrl1 int
+		var yyrt1 bool
+		_, _ = yyrl1, yyrt1
+		yyrr1 = yyl1 // len(yyv1)
+		if yyl1 > cap(yyv1) {
+
+			yyrg1 := len(yyv1) > 0
+			yyv21 := yyv1
+			yyrl1, yyrt1 = z.DecInferLen(yyl1, z.DecBasicHandle().MaxInitLen, 40)
+			if yyrt1 {
+				if yyrl1 <= cap(yyv1) {
+					yyv1 = yyv1[:yyrl1]
+				} else {
+					yyv1 = make([]DockerLogOptionsVar, yyrl1)
+				}
+			} else {
+				yyv1 = make([]DockerLogOptionsVar, yyrl1)
+			}
+			yyc1 = true
+			yyrr1 = len(yyv1)
+			if yyrg1 {
+				copy(yyv1, yyv21)
+			}
+		} else if yyl1 != len(yyv1) {
+			yyv1 = yyv1[:yyl1]
+			yyc1 = true
+		}
+		yyj1 := 0
+		for ; yyj1 < yyrr1; yyj1++ {
+			yyh1.ElemContainerState(yyj1)
+			if r.TryDecodeAsNil() {
+				yyv1[yyj1] = DockerLogOptionsVar{}
+			} else {
+				yyv2 := &yyv1[yyj1]
+				yyv2.CodecDecodeSelf(d)
+			}
+
+		}
+		if yyrt1 {
+			for ; yyj1 < yyl1; yyj1++ {
+				yyv1 = append(yyv1, DockerLogOptionsVar{})
+				yyh1.ElemContainerState(yyj1)
+				if r.TryDecodeAsNil() {
+					yyv1[yyj1] = DockerLogOptionsVar{}
+				} else {
+					yyv3 := &yyv1[yyj1]
+					yyv3.CodecDecodeSelf(d)
+				}
+
+			}
+		}
+
+	} else {
+		yyj1 := 0
+		for ; !r.CheckBreak(); yyj1++ {
+
+			if yyj1 >= len(yyv1) {
+				yyv1 = append(yyv1, DockerLogOptionsVar{}) // var yyz1 DockerLogOptionsVar
+				yyc1 = true
+			}
+			yyh1.ElemContainerState(yyj1)
+			if yyj1 < len(yyv1) {
+				if r.TryDecodeAsNil() {
+					yyv1[yyj1] = DockerLogOptionsVar{}
+				} else {
+					yyv4 := &yyv1[yyj1]
+					yyv4.CodecDecodeSelf(d)
+				}
+
+			} else {
+				z.DecSwallow()
+			}
+
+		}
+		if yyj1 < len(yyv1) {
+			yyv1 = yyv1[:yyj1]
+			yyc1 = true
+		} else if yyj1 == 0 && yyv1 == nil {
+			yyv1 = []DockerLogOptionsVar{}
 			yyc1 = true
 		}
 	}

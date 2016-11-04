@@ -941,6 +941,15 @@ type Container struct {
 	Stdin     bool `json:"stdin,omitempty"`
 	StdinOnce bool `json:"stdinOnce,omitempty"`
 	TTY       bool `json:"tty,omitempty"`
+	// This is the log options only for Docker container(rkt does not has these features)
+	DockerLogDriver  string                `json:"dockerLogDriver"`
+	DockerLogOptions []DockerLogOptionsVar `json:"dockerLogOptions,omitempty"`
+}
+
+//DockerLogOptionsVar only support docker log config options
+type DockerLogOptionsVar struct {
+	Name  string `json:"name"`
+	Value string `json:"value,omitempty"`
 }
 
 // Handler defines a specific action that should be taken
